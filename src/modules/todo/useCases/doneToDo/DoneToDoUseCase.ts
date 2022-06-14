@@ -4,17 +4,18 @@ import { ToDo } from '../../../../modules/todo/infra/typeorm/entities/ToDo';
 import { IToDosRepository } from '../../../../modules/todo/repositories/IToDoRepository';
 
 @injectable()
-class ListToDoUseCase {
+class DoneToDoUseCase {
   constructor(
     @inject('ToDosRepository')
     private todosRepository: IToDosRepository,
   ) {}
 
-  async execute(): Promise<ToDo[]> {
-    const todos = await this.todosRepository.findAll();
+  async execute(id: string): Promise<ToDo> {
 
-    return todos;
+    const todo = await this.todosRepository.done(id);
+
+    return todo;
   }
 }
 
-export { ListToDoUseCase };
+export { DoneToDoUseCase };

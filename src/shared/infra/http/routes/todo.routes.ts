@@ -1,15 +1,28 @@
 import { Router } from 'express';
 
+import { CreateToDoController } from '../../../../modules/todo/useCases/createToDo/CreateToDoController';
+import { ListToDoController } from '../../../../modules/todo/useCases/listToDo/ListToDoController';
+import { DeleteToDoController } from '../../../../modules/todo/useCases/deteleToDo/DeleteToDoController';
+import { DoneToDoController } from '../../../../modules/todo/useCases/doneToDo/DoneTodoController';
+import { UpdateToDoController } from '../../../../modules/todo/useCases/updateTodo/UpdateToDoController';
+
 const toDoRoutes = Router();
 
-toDoRoutes.get('/list')
+const createToDoController = new CreateToDoController();
+const listToDoController = new ListToDoController();
+const doneToDoController = new DoneToDoController();
+const deleteToDoController = new DeleteToDoController();
+const updateToDoController = new UpdateToDoController();
+ 
 
-toDoRoutes.post('/create')
+toDoRoutes.get('/list', listToDoController.handle);
 
-toDoRoutes.put('/update')
+toDoRoutes.post('/create', createToDoController.handle);
 
-toDoRoutes.delete('/delete')
+toDoRoutes.put('/update', updateToDoController.handle);
 
-toDoRoutes.patch('/done')
+toDoRoutes.delete('/delete', deleteToDoController.handle);
+
+toDoRoutes.patch('/done', doneToDoController.handle);
 
 export default toDoRoutes;

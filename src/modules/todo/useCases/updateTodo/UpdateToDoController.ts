@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { UpdateToDoUseCase } from './UpdateTodoUseCase';
+import { UpdateToDoUseCase } from './UpdateToDoUseCase';
 
 class UpdateToDoController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -22,3 +22,5 @@ class UpdateToDoController {
     return response.status(201).json(toDo);
   }
 }
+
+export { UpdateToDoController };
