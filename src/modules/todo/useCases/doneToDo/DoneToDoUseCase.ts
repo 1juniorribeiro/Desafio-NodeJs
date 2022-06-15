@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { ToDo } from '../../../../modules/todo/infra/typeorm/entities/ToDo';
 import { IToDosRepository } from '../../../../modules/todo/repositories/IToDoRepository';
+import AppError from '../../../../shared/errors/AppError';
 
 @injectable()
 class DoneToDoUseCase {
@@ -11,12 +12,14 @@ class DoneToDoUseCase {
   ) {}
 
   async execute(id: string): Promise<ToDo> {
+    const toDoToDone = await this.todosRepository.findById(id);
 
-    console.log('------------------------------------------------------------', id)
+    if (!toDoToDone) {
+      throw new AppError('ToDo not found');
+    }
 
     const todo = await this.todosRepository.done(id);
 
-    console.log('todo----------------------------', todo)
 
     return todo;
   }

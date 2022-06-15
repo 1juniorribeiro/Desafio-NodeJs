@@ -2,6 +2,7 @@ import { ToDoRepositoryInMemory } from "../../repositories/in-memory/ToDoReposit
 import { CreateToDoUseCase } from "../createToDo/CreateToDoUseCase";
 import { UpdateToDoUseCase } from "./UpdateToDoUseCase";
 import { Priority } from "../../dtos/ICreateToDoDTO";
+import AppError from '../../../../shared/errors/AppError';
 
 let toDoRepositoryInMemory: ToDoRepositoryInMemory;
 let createToDoUseCase: CreateToDoUseCase;
@@ -35,5 +36,42 @@ describe('Update To Do', () => {
     expect(toDoUpdated).toHaveProperty(['done'], false)
     expect(toDoUpdated).toHaveProperty('created_at', createdAtToDo)
     expect(toDoUpdated.finished_at).toBeUndefined();
+  })
+
+  it('Should not be able update To Do with invalid id', async () => {
+    return expect(
+      updateToDoUseCase.execute({
+        id: 'teste',
+        description: 'Teste',
+        priority: Priority.low,
+    })).rejects.toEqual(new AppError('ToDo not found'));
+  })
+
+  it('Should not be able update To Do with invalid priority', async () => {
+    const toDo = await createToDoUseCase.execute({
+      description: 'Teste',
+      priority: Priority.low,
+    })
+
+    return expect(
+      updateToDoUseCase.execute({
+        id: toDo.id,
+        description: 'Teste',
+        priority: undefined,
+      })).rejects.toEqual(new AppError('Priority is invalid, only low, medium or high'));
+  })
+
+  it('Should not be able update To Do with invalid description', async () => {
+    const toDo = await createToDoUseCase.execute({
+      description: 'Teste',
+      priority: Priority.low,
+    })
+
+    return expect(
+      updateToDoUseCase.execute({
+        id: toDo.id,
+        description: '',
+        priority: Priority.low,
+      })).rejects.toEqual(new AppError('Description is required'));
   })
 })
