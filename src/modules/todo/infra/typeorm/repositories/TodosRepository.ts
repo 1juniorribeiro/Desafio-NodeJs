@@ -58,6 +58,11 @@ class ToDosRepository implements IToDosRepository {
     return todo;
   }
 
+  async findById(id: string): Promise<ToDo> {
+    const todo = await this.repository.findOne({where: { id: id}});
+
+    return todo;
+  }
 }
 
 export { ToDosRepository };

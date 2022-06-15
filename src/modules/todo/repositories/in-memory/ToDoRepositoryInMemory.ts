@@ -51,4 +51,11 @@ class ToDoRepositoryInMemory implements IToDosRepository {
     return toDo;
   }
   
+  async findById(id: string): Promise<ToDo> {
+    const toDo = this.toDo.find(t => t.id === id);
+
+    return toDo;
+  }
 }
+
+export { ToDoRepositoryInMemory }
