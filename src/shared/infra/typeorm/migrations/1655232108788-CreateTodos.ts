@@ -41,5 +41,4 @@ export class CreateTodos1655232108788 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
       await queryRunner.dropTable('todos');
     }
-
 }
