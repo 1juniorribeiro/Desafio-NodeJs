@@ -5,13 +5,13 @@ import { DeleteToDoUseCase} from './DeleteToDoUseCase';
 
 class DeleteToDoController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const { Id } = request.query;
 
     const deleteToDoUseCase = container.resolve(DeleteToDoUseCase);
 
-    await deleteToDoUseCase.execute(id);
+    await deleteToDoUseCase.execute(String(Id));
 
-    return response.status(204);
+    return response.status(204).json();
   }
 }
 

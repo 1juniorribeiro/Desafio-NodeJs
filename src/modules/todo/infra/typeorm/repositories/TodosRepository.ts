@@ -13,16 +13,13 @@ class ToDosRepository implements IToDosRepository {
   }
 
   async create({
-    id,
     description,
-    priority,
-    done
+    priority
   }: ICreateToDoDTO): Promise<ToDo> {
     const toDo = this.repository.create({
-      id,
       description,
       priority,
-      done
+      done: false
     });
 
     await this.repository.save(toDo);
@@ -44,13 +41,15 @@ class ToDosRepository implements IToDosRepository {
 
     return todo;
   }
-  async delete(id: string): Promise<void> {
-    await this.repository.delete({ id: id });
+  async delete(Id: string): Promise<void> {
+    console.log('------------------------------------------------------------', Id)
+    await this.repository.delete(Id);
+    console.log('depoisawait--------------------------------------------')
   }
 
   async done(id: string): Promise<ToDo> {
     const todo = await this.repository.findOne({where: { id: id}});
-
+        
     todo.done = true;
     todo.finished_at = new Date();
 

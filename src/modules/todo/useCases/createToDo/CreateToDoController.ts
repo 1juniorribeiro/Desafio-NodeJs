@@ -7,16 +7,14 @@ class CreateToDoController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
       description,
-      priority,
-      done
+      priority
     } = request.body;
 
     const createToDoUseCase = container.resolve(CreateToDoUseCase);
 
     const todo = await createToDoUseCase.execute({
       description,
-      priority,
-      done
+      priority
     });
 
     return response.status(201).json(todo);

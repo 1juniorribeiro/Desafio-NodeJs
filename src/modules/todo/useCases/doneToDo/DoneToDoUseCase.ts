@@ -12,7 +12,11 @@ class DoneToDoUseCase {
 
   async execute(id: string): Promise<ToDo> {
 
+    console.log('------------------------------------------------------------', id)
+
     const todo = await this.todosRepository.done(id);
+
+    console.log('todo----------------------------', todo)
 
     return todo;
   }

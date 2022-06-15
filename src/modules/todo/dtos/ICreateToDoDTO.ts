@@ -8,7 +8,8 @@ enum Priority {
 interface ICreateToDoDTO {
   description: string;
   priority: Priority;
-  done: boolean;
+  done?: boolean;
+  finished_at?: Date;
   id?: string;
 }
 

@@ -7,7 +7,6 @@ import { Priority } from '../../../../modules/todo/dtos/ICreateToDoDTO';
 interface IRequest {
   description: string;
   priority: Priority;
-  done: false;
 }
 
 @injectable()
@@ -17,11 +16,10 @@ class CreateToDoUseCase {
     private todosRepository: IToDosRepository,
   ) {}
 
-  async execute({description, done, priority}: IRequest): Promise<ToDo> {
+  async execute({description, priority}: IRequest): Promise<ToDo> {
     const todo = this.todosRepository.create({
       description,
-      priority,
-      done,
+      priority
   });
 
   return todo;

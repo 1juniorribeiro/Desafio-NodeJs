@@ -5,11 +5,11 @@ import { DoneToDoUseCase} from './DoneToDoUseCase';
 
 class DoneToDoController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const { id } = request.query;
 
     const doneToDoUseCase = container.resolve(DoneToDoUseCase);
 
-    const toDo = await doneToDoUseCase.execute(id);
+    const toDo = await doneToDoUseCase.execute(String(id));
 
     return response.status(201).json(toDo);
   }

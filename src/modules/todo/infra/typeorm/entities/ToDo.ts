@@ -12,7 +12,6 @@ class ToDo {
 
   @Column()
   done: boolean;
-
   
   @Column()
   priority: string;

@@ -23,6 +23,6 @@ toDoRoutes.put('/update', updateToDoController.handle);
 
 toDoRoutes.delete('/delete', deleteToDoController.handle);
 
-toDoRoutes.patch('/done', doneToDoController.handle);
+toDoRoutes.put('/done', doneToDoController.handle);
 
 export default toDoRoutes;
