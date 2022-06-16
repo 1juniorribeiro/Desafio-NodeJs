@@ -26,8 +26,6 @@ describe('Done To Do Controller', () => {
         priority: 'medium',
       });
 
-      console.log('responseCreate', responseCreate.body);
-
     const IdToDone = responseCreate.body.id;
     const createAt = responseCreate.body.created_at;
 

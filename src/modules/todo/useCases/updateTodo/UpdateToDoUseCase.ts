@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import { validate } from 'uuid';
 
 import { ToDo } from '../../../../modules/todo/infra/typeorm/entities/ToDo';
 import { IToDosRepository } from '../../../../modules/todo/repositories/IToDoRepository';
@@ -19,13 +20,11 @@ class UpdateToDoUseCase {
   ) {}
 
   async execute({description, priority, id}: IRequest): Promise<ToDo> {
-    const toDo = await this.todosRepository.findById(id);
-
-    if(!toDo) {
-      throw new AppError('ToDo not found');
+    if(!validate(id)) {
+      throw new AppError('Invalid Id');
     }
 
-    if (!description && description === '') {
+    if (!description || description === '') {
       throw new AppError('Description is required');
     }
 

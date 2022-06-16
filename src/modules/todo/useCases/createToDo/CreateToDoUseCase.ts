@@ -18,7 +18,7 @@ class CreateToDoUseCase {
   ) {}
 
   async execute({description, priority}: IRequest): Promise<ToDo> {
-    if (!description && description === '') {
+    if (!description || description === '') {
       throw new AppError('Description is required');
     }
 

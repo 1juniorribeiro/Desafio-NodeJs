@@ -44,7 +44,7 @@ describe('Update To Do', () => {
         id: 'teste',
         description: 'Teste',
         priority: Priority.low,
-    })).rejects.toEqual(new AppError('ToDo not found'));
+    })).rejects.toEqual(new AppError('Invalid Id'));
   })
 
   it('Should not be able update To Do with invalid priority', async () => {
