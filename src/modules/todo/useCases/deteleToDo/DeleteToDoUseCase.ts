@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import { validate } from 'uuid';
 
 import { IToDosRepository } from '../../../../modules/todo/repositories/IToDoRepository';
 import AppError from '../../../../shared/errors/AppError';
@@ -11,12 +12,9 @@ class DeleteToDoUseCase {
   ) {}
 
   async execute(id: string): Promise<void> {
-    const toDo = await this.todosRepository.findById(id);
-
-    if(!toDo) {
-      throw new AppError('ToDo not found');
+    if(!validate(id)) {
+      throw new AppError('Invalid Id');
     }
-
     await this.todosRepository.delete(id);
   }
 }

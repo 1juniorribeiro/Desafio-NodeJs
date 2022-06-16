@@ -11,10 +11,9 @@ class ToDoRepositoryInMemory implements IToDosRepository {
     done,
     id
   }: ICreateToDoDTO): Promise<ToDo> {
-    const toDo = new ToDo();
+    const toDo = new ToDo(); 
 
     Object.assign(toDo, {
-      id,
       description,
       priority,
       done: false,

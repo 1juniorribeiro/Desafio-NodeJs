@@ -42,9 +42,7 @@ class ToDosRepository implements IToDosRepository {
     return todo;
   }
   async delete(Id: string): Promise<void> {
-    console.log('------------------------------------------------------------', Id)
     await this.repository.delete(Id);
-    console.log('depoisawait--------------------------------------------')
   }
 
   async done(id: string): Promise<ToDo> {

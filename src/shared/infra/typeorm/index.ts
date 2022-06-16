@@ -5,8 +5,11 @@ export default async(host = 'database_todo'): Promise<Connection> => {
 
   return createConnection(
     Object.assign(defaultOptions, {
-      host: host,
-      database: defaultOptions.database
+      host: process.env.NODE_ENV === 'test' ? 'localhost' :  host,
+      database: 
+        process.env.NODE_ENV === 'test' 
+          ? 'todo_test'
+          : defaultOptions.database
     })
   )
 }

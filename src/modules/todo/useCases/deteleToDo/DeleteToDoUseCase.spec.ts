@@ -31,6 +31,6 @@ describe('Delete To Do', () => {
   })
 
   it('Should not be able to delete To Do with Invalid Id', async () => {
-    await expect(deleteToDoUseCase.execute('')).rejects.toEqual(new AppError('ToDo not found'));
+    await expect(deleteToDoUseCase.execute('')).rejects.toEqual(new AppError('Invalid Id'));
   })
 })

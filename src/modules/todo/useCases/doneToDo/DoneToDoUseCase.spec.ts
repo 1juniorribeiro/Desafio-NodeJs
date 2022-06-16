@@ -32,6 +32,6 @@ describe('Done To Do', () => {
   })
 
   it('Should not be able done To Do with Invalid Id', async () => {
-    await expect(doneToDoUseCase.execute('')).rejects.toEqual(new AppError('ToDo not found'));
+    await expect(doneToDoUseCase.execute('')).rejects.toEqual(new AppError('Invalid Id'));
   })
 })
