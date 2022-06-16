@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "To Do Documentation",
+    "description": "A simple to do list API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "junior_18ribeiro@hotmail.com"
+    }
+  },
+  "paths":{
+    "/todos/create":{
+      "post": {
+        "tags": ["todos"],
+        "summary": "Create a new todo",
+        "description": "Create a new todo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the todo",
+                    "example": "Buy milk",
+                    "required": true
+                  },
+                  "priority": {
+                    "type": "string",
+                    "description": "The due date of the todo",
+                    "enum": ["low", "medium", "high"],
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "todo created with sucess"
+          }
+        }
+      }
+    },
+    "/todos/list": {
+      "get": {
+        "tags": ["todos"],
+        "summary": "List the to dos",
+        "description": "List the to dos",
+        "responses":{
+          "200": {
+            "description": "List of todos"
+          }
+        }
+      }
+    },
+    "/todos/update": {
+      "put": {
+        "tags": ["todos"],
+        "summary": "Update to do",
+        "description": "Update to do",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The id of the todo",
+                    "example": "b5ff4982-565a-4d82-a7ea-77597f2d237a",
+                    "required": true
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the todo",
+                    "example": "Buy milk",
+                    "required": true
+                  },
+                  "priority": {
+                    "type": "string",
+                    "description": "The due date of the todo",
+                    "enum": ["low", "medium", "high"],
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Update to do"
+          }
+        }
+      }
+    },
+    "/todos/delete?Id=id": {
+      "delete": {
+        "tags": ["todos"],
+        "summary": "delete to do",
+        "description": "delete to do",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "The id of the todo",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The id of the todo",
+              "example": "b5ff4982-565a-4d82-a7ea-77597f2d237a"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete to do"
+          }
+        }
+      }
+    },
+    "/todos/done": {
+      "put": {
+        "tags": ["todos"],
+        "summary": "Done the to do",
+        "description": "Done the to do",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id of the todo",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The id of the todo",
+              "example": "b5ff4982-565a-4d82-a7ea-77597f2d237a"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Done to do"
+          }
+        }
+      }
+    }
+  }
+}
